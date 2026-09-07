@@ -1,6 +1,6 @@
 ---
 name: ferris-windows
-description: Windows paths, encoding, DLL loading, elevation, and Win32/COM/PInvoke contracts. Use when a task hinges on those surfaces or on PowerShell 7 argument and encoding rules.
+description: Windows contracts. Use when tasks hinge on paths, encoding, DLL loading, elevation, Win32/COM/PInvoke, or PowerShell 7 argument handling.
 ---
 
 # Windows Engineering
@@ -13,5 +13,3 @@ Read the relevant sections of [references/rules.md](./references/rules.md). Runt
 
 - Chain success-dependent native commands with `&&`. Use explicit status handling only for special exit-code contracts or recovery. Cmdlet error handling is separate.
 - Use argument arrays and literal paths. PowerShell is not a POSIX shell.
-
-Use ferris-native for language ownership and builds, ferris-workflow for diagnosis, tests, and verification.

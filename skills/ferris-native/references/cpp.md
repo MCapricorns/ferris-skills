@@ -16,7 +16,7 @@ For unconstrained code: PascalCase types/aliases, snake_case functions, lowercas
 - `std::pmr` resources must outlive their containers. Unequal-resource swaps can be undefined with non-propagating allocators.
 - Neither `std::function` nor `std::move_only_function` guarantees allocation-free storage. Select the wrapper by copyability and invocation contract.
 - Coroutines supply neither a scheduler nor cancellation semantics; use the existing runtime. For Windows overlapped I/O, keep `OVERLAPPED` and buffers alive until completion is observed; a cancellation request is not completion.
-- `std::print`/`std::println` Unicode behavior depends on literal encoding and destination. See ferris-windows for console/pipe boundaries.
+- `std::print`/`std::println` Unicode behavior depends on literal encoding and destination; on Windows, console text and redirected pipes have different encoding contracts.
 
 ## Windows builds
 
@@ -29,7 +29,7 @@ For new unconstrained Windows projects, use MSBuild and prefer the standard libr
   & $vswhere -latest -products '*' -requires Microsoft.Component.MSBuild -find 'MSBuild\**\Bin\MSBuild.exe'
   ```
 
-  Invoke the returned path, restore NuGet when applicable, and build the affected configuration/platform. Shell quoting and exit handling belong to ferris-windows.
+  Invoke the returned path, restore NuGet when applicable, and build the affected configuration/platform.
 - Preserve manifest restore, triplet, installed-directory, and binary-cache settings; keep outputs and `vcpkg_installed/` out of Git. No unsolicited machine-wide integration changes.
 - Preserve `/W4`, `/sdl`, library warnings-as-errors, selected standard, and UTF-8 source/execution encoding. New binaries use `/guard:cf` at compile time and `/GUARD:CF` at link time; `/CETCOMPAT` requires compatible x86/x64 binaries, not ARM64 or incompatible hooking. Never drop existing hardening for convenience.
 

@@ -1,6 +1,6 @@
 # AGENTS.md
 
-These files apply on every turn in that repository. Revisit each line and delete what the current models no longer need. Task-specific workflows belong in a skill, not here.
+Keep durable project constraints here and task-specific workflows in skills. Check actual loading before removing duplicate safety or approval rules; a distributed skill cannot assume the user's global instructions.
 
 ## Read what the task needs
 
@@ -11,6 +11,6 @@ Do not require a repo map or a doc stack for a typo. Point at a doc only when th
 
 ## Checks
 
-Do not add "always run the full suite" or extra verification the model already does. Preserve existing repository gates. Never weaken a meaningful check to make an instruction shorter.
+Preserve required repository checks and meaningful assertions. Scale other verification to the change; once checks pass, repeat or broaden only for new changes, failures, or unresolved concerns. Do not require tests that merely mirror reversible, low-impact edits.
 
 For a local suite that uses disposable fixtures and has no production access, it is enough to say: run it, fix failures caused by the requested change, and rerun the affected tests without asking at each step.

@@ -1,11 +1,11 @@
 ---
 name: ferris-workflow
-description: Debugging, regression tests, deletion proof, and lifecycle analysis. Use when a failure needs a cause, a test must catch a break, a deletion needs proof, or cancellation and shared state are being simplified.
+description: Debug and verify behavior changes. Use when diagnosing failures, designing regression tests, proving deletions, or changing cancellation and shared state.
 ---
 
 # Engineering Workflow
 
-Check `git status` and leave unrelated work alone. A read-only request stays read-only. Commit, push, release, or repo-wide cleanup only when the user asked. Finish the requested work, including running and inspecting the result; do not stop at a first draft.
+Check `git status` and leave unrelated work alone. A read-only request stays read-only. Commit, push, release, or repo-wide cleanup only when the user asked. Finish the requested outcome with verification proportional to the change; do not stop at a first draft.
 
 | Task | Read |
 |------|------|

@@ -25,7 +25,9 @@ Load by task, not by chain: a Python regression needs workflow, not native; Linu
 
 See the official [skill-authoring guidance](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) for concision and progressive disclosure.
 
-Run `python scripts/validate_skills.py`. CI uses the same validator for frontmatter/YAML safety, naming/description limits, local references, orphan references, and README coverage. It checks packaging, not model effectiveness.
+In this repository, frontmatter uses only `name` and `description`, both single-line plain scalars. Avoid `: ` and ` #` in their values; names match their directories.
+
+After changes to skills, README skill listings, or the validator, run `python scripts/validate_skills.py`. CI uses the same validator for frontmatter/YAML safety, naming/description limits, local references, orphan references, and README coverage. It checks packaging, not model effectiveness.
 
 ## Install and update
 
@@ -40,7 +42,7 @@ List, install all globally, or update global installations:
 ```powershell
 npx skills add github:MCapricorns/ferris-skills -l
 npx skills add github:MCapricorns/ferris-skills -s '*' -g
-npx skills update -g
+npx skills update -g -y
 ```
 
 Use `-s ferris-workflow` or `-s ferris-instruct` to select one skill. Add `--copy` if symlinks are unsuitable. Manual installation: copy desired `skills/<name>/` directories into `~/.agents/skills/` or the agent's own skill directory. Reload skills or restart the agent after updating.
