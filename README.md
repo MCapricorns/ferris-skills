@@ -6,21 +6,21 @@ Primary development environment: **Windows with PowerShell 7 (`pwsh`)**. Command
 
 ## Skills
 
-| Skill | Use for | On-demand references |
-|-------|---------|----------------------|
-| [ferris-workflow](skills/ferris-workflow/SKILL.md) | Diagnosing a failure, writing a sensitive test, proving a deletion, or simplifying lifecycle/races | Debugging, test sensitivity, deletion proof, lifecycle/races |
-| [ferris-native](skills/ferris-native/SKILL.md) | C++/Rust ownership, unsafe/FFI, async cancellation, or compiler/linker and Cargo/MSBuild failures | C++ or Rust; both for mixed-language boundaries |
-| [ferris-windows](skills/ferris-windows/SKILL.md) | Windows paths, encoding, DLL loading, elevation, or Win32/COM/PInvoke | Paths, share modes, DLL search, encoding, privilege, GUI |
-| [ferris-instruct](skills/ferris-instruct/SKILL.md) | Adding, editing, or reviewing SKILL.md, AGENTS.md, or other always-on agent instructions | Skill files, AGENTS.md, boundaries/persistence |
+| Skill | Use for | Guidance |
+|-------|---------|----------|
+| [ferris-workflow](skills/ferris-workflow/SKILL.md) | Diagnosing a failure, writing a sensitive test, proving a deletion, or simplifying lifecycle/races | Execution boundaries, debugging/tests, deletion proof, and lifecycle/races in SKILL.md |
+| [ferris-native](skills/ferris-native/SKILL.md) | C++/Rust ownership, unsafe/FFI, async cancellation, or compiler/linker and Cargo/MSBuild failures | Separate C++ and Rust references; read both for mixed-language boundaries |
+| [ferris-windows](skills/ferris-windows/SKILL.md) | Windows paths, encoding, DLL loading, elevation, or Win32/COM/PInvoke | Shell, paths, DLL search, encoding, privilege, and GUI sections in SKILL.md |
+| [ferris-instruct](skills/ferris-instruct/SKILL.md) | Adding, editing, or reviewing SKILL.md, AGENTS.md, or other always-on agent instructions | Authoring, authorization, clarification, and completion in SKILL.md |
 
 Load by task, not by chain: a Python regression needs workflow, not native; Linux Rust needs no Windows rules; a compiler fix does not load instruct. References link directly from their entry point.
 
 ## Design rules
 
 - **Keep the delta over model knowledge.** House preferences and consequential traps stay; syntax tutorials, investigation itineraries, and generic caution do not.
-- **Descriptions only say when.** A short trigger for the concrete action, not the whole domain, and not "before every commit." The body is a router; read only the reference the task needs.
+- **Precise triggers, compact bodies.** Descriptions say what the skill does and when to use it, not the whole domain or "before every commit." Keep concise guidance in SKILL.md; split only substantial, independent detail that benefits from on-demand reading.
 - **One concern, one owner.** Workflow owns diagnosis/tests/cleanup, native owns language contracts, Windows owns platform behavior, instruct owns standing agent instructions. Do not add a fifth skill for a one-off.
-- **Finish requested work.** Do not require a review stop after a first draft. Ask only at decisions the user would actually want to make. Repository conventions win; check current vendor docs when adopting a feature.
+- **Finish authorized work.** Make routine reversible choices, reuse existing approvals, and do not stop after a first draft. Ask for consequential missing decisions or explicit approval boundaries; a blocked step does not end safe independent work. Repository conventions win over house defaults; check current vendor docs when adopting a feature.
 - **Preserve guarantees.** Shorter text must keep regression sensitivity, deletion proof, security/compatibility boundaries, and meaningful checks.
 
 See the official [skill-authoring guidance](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) for concision and progressive disclosure.
