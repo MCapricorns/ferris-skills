@@ -5,15 +5,19 @@ description: Debug and verify behavior changes. Use when diagnosing failures, de
 
 # Engineering Workflow
 
+Plain wording, formatting, and Git-message edits do not need this skill; do not make it a prerequisite for every edit or commit.
+
 ## Execution boundaries
 
-Check `git status` and preserve unrelated work. Requests for review or analysis alone are read-only; an explicit request to review and fix authorizes in-scope edits. Do not commit, push, release, deploy, or perform destructive or unrelated actions without user authorization. A requested action includes routine in-scope prerequisites, not broader or destructive actions; do not ask again for approval already given.
+Reviews and analysis alone are read-only; a request to implement or review and fix authorizes necessary in-scope changes and non-destructive validation. Check `git status` in a worktree and preserve unrelated work. Do not commit, push, release, deploy, or perform destructive or unrelated actions without user authorization; reuse authorization already given.
 
-Make routine, reversible choices using available evidence. Ask only for a consequential missing decision, conflicting requirements, or an explicit approval boundary. Finish the authorized outcome, including affected tests/docs and non-destructive validation; fix change-caused failures without a first-draft review stop. If blocked, continue safe independent work and report what remains unverified or undone.
+Never read credential stores, expose or commit secrets, or dump the environment; inspect only task-relevant non-secret settings. Do not weaken existing security, approval, data-loss, or compatibility guarantees without explicit approval.
 
-Before landing a diff, drop dead additions and debug debris introduced by that diff. Broader cuts need an authorized cleanup scope. Never read credential stores or dump secrets or the environment; inspect only task-relevant non-secret settings.
+## Verification scope
 
-Preserve required repository gates and never weaken meaningful assertions. Scale other checks to the change; repeat or broaden only for new changes, failures, or unresolved concerns. Report checks actually run and distinguish unrelated failures from change-caused failures.
+Preserve required repository checks and meaningful assertions. Scale other verification to the change and reuse existing checks that cover the affected behavior. Add or change tests when needed to cover that behavior; avoid tests that merely mirror the implementation. Repeat or broaden checks only for new changes, failures, or unresolved concerns. Report checks actually run, distinguish unrelated failures from change-caused failures, and identify verification gaps.
+
+Add or change CI only for an explicit request or a concrete project verification need; use existing project tooling where suitable. A Git repository alone does not justify adding GitHub Actions. Preserve required checks when changing automation.
 
 ## Debugging and regression checks
 
@@ -27,7 +31,7 @@ Keep mocks at external or slow boundaries and model failures. For generated prop
 
 ## Cleanup and deletion proof
 
-Use this section for authorized cleanup or deletions, not routine diff hygiene. Cleanup may cut proven in-scope dead code without per-item approval; a review-only audit proposes cuts without making them.
+Remove dead additions and debug debris introduced by the current change. Use the deletion-proof guidance below for broader authorized cleanup or deletions. Cleanup may cut proven in-scope dead code without per-item approval; a review-only audit proposes cuts without making them.
 
 - **Reachability:** classify candidate consumers as production, support-only, or unresolved. Check entrypoints, configuration, registration/reflection, codegen, string dispatch, external callers, and persisted keys where they apply. Tests and examples may document public contracts. Neither an empty search nor a green suite proves there are no consumers. Keep candidates with unresolved reachability and report the uncertainty; continue with other proven in-scope cuts.
 - **Contract:** compare ownership, behavior, ordering, errors, and side effects, not textual similarity. Quiet history is not disuse. Name the behavior being surrendered and a check that would expose a mistaken cut.
