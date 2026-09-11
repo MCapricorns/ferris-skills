@@ -1,6 +1,6 @@
 ---
 name: ferris-windows
-description: Windows contracts. Use when tasks hinge on paths, encoding, DLL loading, elevation, Win32/COM/PInvoke, or PowerShell 7 argument handling.
+description: Implement or debug Windows path, encoding, DLL-loading, privilege, Win32/COM/PInvoke, and PowerShell 7 command behavior.
 ---
 
 # Windows Engineering
@@ -9,8 +9,8 @@ Windows and PowerShell 7 (`pwsh`) are house defaults only when the target is unc
 
 ## Shell execution
 
-- Chain success-dependent native commands with `&&`. Use explicit status handling only for special exit-code contracts or recovery. Cmdlet error handling is separate.
-- Use argument arrays and literal paths. PowerShell is not a POSIX shell.
+- Stop dependent work when a native command fails; `&&` handles ordinary success dependencies in PowerShell 7. Handle tool-specific exit-code contracts or recovery explicitly. Cmdlet error handling is separate.
+- Use literal paths and direct native invocation with argument arrays where possible. `Start-Process -ArgumentList` joins array elements into one command-line string; preserve the target program's required quoting for spaces and embedded quotes. PowerShell is not a POSIX shell.
 
 ## Paths, open files, and DLLs
 
@@ -47,4 +47,4 @@ Use `FAILED`/`SUCCEEDED` for `HRESULT`, `ERROR_SUCCESS` for `LSTATUS`, and the d
 
 Declare GUI DPI awareness in the manifest, using `PerMonitorV2` where supported, and use per-window DPI. Respect framework setup instead of racing it with late runtime configuration.
 
-References: [long paths](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation), [case sensitivity](https://learn.microsoft.com/en-us/windows/wsl/case-sensitivity), [DLL search](https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order), [PowerShell byte redirection](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_redirection).
+References: [long paths](https://learn.microsoft.com/en-us/windows/win32/fileio/maximum-file-path-limitation), [case sensitivity](https://learn.microsoft.com/en-us/windows/wsl/case-sensitivity), [DLL search](https://learn.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order), [PowerShell byte redirection](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_redirection), [Start-Process arguments](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.management/start-process#-argumentlist).

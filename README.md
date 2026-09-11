@@ -23,7 +23,7 @@ Load by task, not by chain: a Python regression needs workflow, not native; Linu
 - **Finish authorized work.** Make routine reversible choices, reuse existing approvals, and do not stop after a first draft. Ask for consequential missing decisions or explicit approval boundaries; a blocked step does not end safe independent work. Repository conventions win over house defaults; check current vendor docs when adopting a feature.
 - **Preserve guarantees.** Shorter text must keep regression sensitivity, deletion proof, security/compatibility boundaries, and meaningful checks.
 
-See the official [skill-authoring guidance](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/best-practices) for concision and progressive disclosure.
+The instruction design follows [OpenAI's GPT-6 Astra guidance](https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6-astra) and [skill-authoring guidance](https://learn.chatgpt.com/docs/build-skills), reviewed on 2026-09-11. Preserve user intent, make approval boundaries explicit, and calibrate delegation and verification to the task. Keep descriptions specific and supporting detail available on demand.
 
 In this repository, frontmatter uses only `name` and `description`, both single-line plain scalars. Avoid `: ` and ` #` in their values; names match their directories.
 
