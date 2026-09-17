@@ -13,7 +13,7 @@ A skill description leads with the concrete action and when it applies, so it st
 
 Keep compact guidance in SKILL.md. Split substantial, independently useful detail into references only when on-demand reading saves context; do not force a router or a separate file for a paragraph. Link references directly from the entry point.
 
-Keep house preferences, consequential traps, and steps whose ordering matters. Leave routine implementation choices open. Do not turn one past failure into a universal gate or add tools, scripts, or references without a concrete need.
+Keep house preferences, consequential traps, and steps whose ordering matters. Leave routine implementation choices open. Do not turn one past failure into a universal gate or add tools, scripts, or references without a concrete need. Committed instructions also steer other contributors' agents and models; keep guidance model-neutral and retire workarounds written for models no longer in use.
 
 ## Authorization and clarification
 
@@ -34,5 +34,3 @@ Preserve required repository checks and meaningful assertions. Scale other verif
 Small behavioral changes still need checks sensitive to the break. Avoid tests that merely mirror implementation details or documentation wording unless that representation is itself the contract. For changed instructions, try realistic matching and nearby non-matching requests, checking task completion and authorization as well as selection. Use an independent behavioral pass when complexity warrants it. Packaging checks establish loading and link validity, not instruction effectiveness.
 
 When auditing, cite original wording and a concrete consequence. Preserve regression sensitivity, deletion proof, security/compatibility boundaries, and meaningful checks when simplifying instructions.
-
-Sources: [OpenAI Astra guidance](https://developers.openai.com/api/docs/guides/latest-model?model=gpt-6-astra) and [OpenAI skill authoring](https://learn.chatgpt.com/docs/build-skills).
