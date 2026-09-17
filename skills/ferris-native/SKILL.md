@@ -1,6 +1,6 @@
 ---
 name: ferris-native
-description: Apply C++/Rust contracts when changing native ownership, unsafe code, FFI, async cancellation, or build configuration, or diagnosing C++/Rust compiler, linker, Cargo, or MSBuild failures.
+description: Use when changing C++/Rust ownership, unsafe code, FFI, async cancellation, or build configuration, or diagnosing C++/Rust compiler, linker, Cargo, or MSBuild failures.
 ---
 
 # Native Engineering

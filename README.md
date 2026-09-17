@@ -8,7 +8,7 @@ Primary development environment: **Windows with PowerShell 7 (`pwsh`)**. Command
 
 | Skill | Use for | Guidance |
 |-------|---------|----------|
-| [ferris-workflow](skills/ferris-workflow/SKILL.md) | Diagnosing a failure, writing a sensitive test, proving a deletion, or simplifying lifecycle/races | Execution boundaries, debugging/tests, deletion proof, and lifecycle/races in SKILL.md |
+| [ferris-workflow](skills/ferris-workflow/SKILL.md) | Diagnosing a failure, writing a sensitive test, proving a deletion, or simplifying lifecycle/races | Boundaries and verification scope in SKILL.md; debugging, deletion proof, and lifecycle/races in references/ |
 | [ferris-native](skills/ferris-native/SKILL.md) | C++/Rust ownership, unsafe/FFI, async cancellation, or compiler/linker and Cargo/MSBuild failures | Separate C++ and Rust references; read both for mixed-language boundaries |
 | [ferris-windows](skills/ferris-windows/SKILL.md) | Windows paths, encoding, DLL loading, elevation, or Win32/COM/PInvoke | Shell, paths, DLL search, encoding, privilege, and GUI sections in SKILL.md |
 | [ferris-instruct](skills/ferris-instruct/SKILL.md) | Adding, editing, or reviewing SKILL.md, AGENTS.md, or other always-on agent instructions | Authoring, authorization, clarification, and completion in SKILL.md |
