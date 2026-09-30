@@ -1,6 +1,6 @@
 ---
 name: ferris-native
-description: Use when changing C++/Rust ownership, unsafe code, FFI, async cancellation, or build configuration, or diagnosing C++/Rust compiler, linker, Cargo, or MSBuild failures.
+description: Changes C++ or Rust ownership, unsafe code, FFI, async cancellation, and build configuration. Use when editing those contracts or diagnosing compiler, linker, Cargo, or MSBuild failures. Not for code outside C++ and Rust.
 ---
 
 # Native Engineering

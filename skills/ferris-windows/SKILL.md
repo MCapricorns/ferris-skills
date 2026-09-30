@@ -1,6 +1,6 @@
 ---
 name: ferris-windows
-description: Implement or debug Windows path, encoding, DLL-loading, privilege, Win32/COM/PInvoke, and PowerShell 7 command behavior.
+description: Implements or debugs Windows paths, encoding, DLL loading, privileges, Win32/COM/PInvoke, and PowerShell 7 commands. Use when the target host or API is Windows. Not for a non-Windows target.
 ---
 
 # Windows Engineering
@@ -9,8 +9,9 @@ Windows and PowerShell 7 (`pwsh`) are house defaults only when the target is unc
 
 ## Shell execution
 
-- Stop dependent work when a native command fails; `&&` handles ordinary success dependencies in PowerShell 7. Handle tool-specific exit-code contracts or recovery explicitly. Cmdlet error handling is separate.
+- Stop dependent work when a native command fails. In PowerShell 7, `&&` checks `$LASTEXITCODE`, but a native nonzero status becomes an error record only when `$PSNativeCommandUseErrorActionPreference` is `$true`; the default is `$false`. Handle tool-specific success codes, such as robocopy, explicitly. Cmdlet error handling is separate.
 - Use literal paths and direct native invocation with argument arrays where possible. `Start-Process -ArgumentList` joins array elements into one command-line string; preserve the target program's required quoting for spaces and embedded quotes. PowerShell is not a POSIX shell.
+- A name that `Get-Command` resolves under WindowsApps may be an app-execution alias, such as the Store redirector for `python` or `python3`, rather than the installed tool. Invoke the real executable or launcher.
 
 ## Paths, open files, and DLLs
 

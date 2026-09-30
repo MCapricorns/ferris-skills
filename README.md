@@ -8,7 +8,7 @@ Primary development environment: **Windows with PowerShell 7 (`pwsh`)**. Command
 
 | Skill | Use for | Guidance |
 |-------|---------|----------|
-| [ferris-workflow](skills/ferris-workflow/SKILL.md) | Diagnosing a failure, writing a sensitive test, proving a deletion, or simplifying lifecycle/races | Boundaries and verification scope in SKILL.md; debugging, deletion proof, and lifecycle/races in references/ |
+| [ferris-workflow](skills/ferris-workflow/SKILL.md) | Diagnosing a failure, writing a sensitive test, proving a deletion, or simplifying lifecycle/races | Boundaries, verification, debugging, deletion proof, and lifecycle/races in SKILL.md |
 | [ferris-native](skills/ferris-native/SKILL.md) | C++/Rust ownership, unsafe/FFI, async cancellation, or compiler/linker and Cargo/MSBuild failures | Separate C++ and Rust references; read both for mixed-language boundaries |
 | [ferris-windows](skills/ferris-windows/SKILL.md) | Windows paths, encoding, DLL loading, elevation, or Win32/COM/PInvoke | Shell, paths, DLL search, encoding, privilege, and GUI sections in SKILL.md |
 | [ferris-instruct](skills/ferris-instruct/SKILL.md) | Adding, editing, or reviewing SKILL.md, AGENTS.md, or other always-on agent instructions | Authoring, authorization, clarification, and completion in SKILL.md |
@@ -18,7 +18,7 @@ Load by task, not by chain: a Python regression needs workflow, not native; Linu
 ## Design rules
 
 - **Keep the delta over model knowledge.** House preferences and consequential traps stay; syntax tutorials, investigation itineraries, and generic caution do not.
-- **Precise triggers, compact bodies.** Descriptions say what the skill does and when to use it, not the whole domain or "before every commit." Keep concise guidance in SKILL.md; split only substantial, independent detail that benefits from on-demand reading.
+- **Precise triggers, compact bodies.** Descriptions say what the skill does and when, in third person or imperative, and still route if a catalog shortens them. A short exclusion belongs there only when another skill would claim the same request. Keep concise guidance in SKILL.md; split only substantial, independent detail that benefits from on-demand reading.
 - **One concern, one owner.** Workflow owns diagnosis/tests/cleanup, native owns language contracts, Windows owns platform behavior, instruct owns standing agent instructions. Do not add a fifth skill for a one-off.
 - **Finish authorized work.** Make routine reversible choices, reuse existing approvals, and do not stop after a first draft. Ask for consequential missing decisions or explicit approval boundaries; a blocked step does not end safe independent work. Repository conventions win over house defaults; check current vendor docs when adopting a feature.
 - **Preserve guarantees.** Shorter text must keep regression sensitivity, deletion proof, security/compatibility boundaries, and meaningful checks.

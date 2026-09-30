@@ -10,6 +10,7 @@ For unconstrained code: PascalCase types/aliases, snake_case functions, lowercas
 - Stored/returned views require an owner that survives every use and no invalidating mutation. Name temporary owners before borrowing; recheck captures and buffers across async boundaries. Return locals without `std::move` to retain NRVO.
 - `std::expected` is not an allocation-free or non-throwing guarantee. Keep `noexcept` truthful, handle callees' exceptions at non-throwing boundaries without hiding programming errors, and report fallible initialization. Preserve allocation/overflow policy; mark must-consider results `[[nodiscard]]`.
 - `std::unreachable()` and `[[assume]]` cause undefined behavior when wrong. Require a proven invariant and measured benefit. For evaluation-mode branching use `if consteval` when supported, not `if constexpr (std::is_constant_evaluated())`.
+- C++26 contract assertions (`pre`, `post`, `contract_assert`) are not always-on checks; an implementation may ignore them. Keep an existing safety check, `[[nodiscard]]` handling, or proven invariant unless that project's evaluation mode is known to run the assertion.
 
 ## Allocation and async
 
@@ -33,4 +34,4 @@ For new unconstrained Windows projects, use MSBuild and prefer the standard libr
 - Preserve manifest restore, triplet, installed-directory, and binary-cache settings; keep outputs and `vcpkg_installed/` out of Git. No unsolicited machine-wide integration changes.
 - Preserve `/W4`, `/sdl`, library warnings-as-errors, selected standard, and UTF-8 source/execution encoding. New binaries use `/guard:cf` at compile time and `/GUARD:CF` at link time; `/CETCOMPAT` requires compatible x86/x64 binaries, not ARM64 or incompatible hooking. Never drop existing hardening for convenience.
 
-Feature adoption: [MSVC standard modes](https://learn.microsoft.com/en-us/cpp/build/reference/std-specify-language-standard-version). `/std:c++latest` includes experimental features; verify compiler **and** STL support instead of equating the switch or publication year with availability.
+Feature adoption: [MSVC standard modes](https://learn.microsoft.com/en-us/cpp/build/reference/std-specify-language-standard-version), [C++26 compiler support](https://en.cppreference.com/cpp/compiler_support/26). `/std:c++latest` includes experimental features; verify compiler **and** STL support, including whether contract assertions run, instead of equating the switch or publication year with availability.
