@@ -5,32 +5,31 @@ description: Authors or reviews SKILL.md, AGENTS.md, CLAUDE.md, and other standi
 
 # Agent Instruction Authoring
 
-## Scope and loading
+## Ownership
 
-Keep durable project constraints in the host's standing file, such as AGENTS.md or CLAUDE.md, and task-specific workflows in skills. Keep repository-specific packaging rules and validation commands in repository instructions, not a portable skill. Check actual loading before removing duplicate safety or approval rules; a distributed skill cannot assume the user's global instructions.
+- One rule, one owner. The always-on file (AGENTS.md, CLAUDE.md) owns authority, approvals, communication, secrets, and habits for every task. A skill owns task-specific depth and restates a general rule only where its own advice could erode it.
+- When two files say the same thing, delete the non-owner's copy; when they disagree, fix the conflict instead of adding a tie-breaker. Check what actually loads (symlinks, per-host copies) before deleting.
+- Repository packaging rules and validation commands go in repository docs, not a portable skill.
 
-The description is injected into the system prompt and may be shortened when the skill catalog is large. Write it in third person or imperative, never first or second person. Lead with the action and the situation, using words the user would say, so the shortened line still routes. Prefer `Use when adding or changing a migration, or reviewing its rollout` to `Use when working with databases`. Add a short exclusion only when a neighboring skill would claim the same request. Avoid keyword lists, overlapping triggers, and loading a portable skill before every edit or commit. A new skill needs a distinct, recurring trigger. Omit optional and host-only frontmatter unless every consumer parses those fields the same way.
+## Writing for current models
 
-Keep compact guidance in SKILL.md. Move detail into a reference only when it is substantial, independently useful, and unused on most activations; a short section stays inline. Link each reference with a forward-slash path directly from SKILL.md, one level deep. Add a contents list only when a partial read of that reference would miss later sections.
+Current models follow instructions closely and generalize from intent, so extra emphasis backfires:
 
-Keep house preferences, consequential traps, and ordering that matters. Leave routine choices open. State an exact command only when variation is a defect; otherwise state the outcome and the constraint. Use a checklist only for that fragile sequence. Run a script for a deterministic operation instead of pasting the script into the prompt, and add a script, tool, or reference only for that need. One past failure does not become a universal gate. Committed instructions steer other contributors' agents; keep them model-neutral, delete workarounds for a model no longer in use, and leave out vendor alignment notes and knowledge the model already has.
+- Write the delta over model knowledge: house preferences, consequential traps, and ordering that matters. Cut tutorials, generic caution, and restated defaults.
+- State a rule once, plainly, with its reason when non-obvious. Capitals, repeated NEVER/MUST, and stacked caveats cause over-application and needless refusals.
+- Do not turn one past failure into a universal gate, and delete workarounds for models no longer in use. Keep committed instructions model-neutral.
+- Give exact commands only when variation is a defect; otherwise state the outcome and the constraint. Use a script for deterministic work instead of pasting it into the prompt.
 
-## Authorization and clarification
+## Skills
 
-- State that user instructions take precedence over skill guidelines, within higher-priority instructions and host permissions. A skill must not silently expand scope, replace the requested outcome, or imply permission for external actions.
-- Requests for review or analysis alone are read-only; an explicit request to review and fix authorizes in-scope edits. Implementation requests authorize necessary in-scope code, tests, docs, configuration, and non-destructive validation.
-- Make routine, reversible choices from available evidence. Ask when missing information materially changes the outcome, requirements conflict, or an explicit approval boundary applies. Explain the concrete decision and recommendation; group blocking questions and continue independent authorized work.
-- Preserve authorization requirements for commits, pushes, releases, deployments, destructive actions, and unrelated changes. A requested action includes routine in-scope prerequisites. Reuse existing authorization; when approval is still needed, finish authorized preparation first so the user can review the concrete result.
-- If an instruction causes a pause, confirmation request, incomplete work, or a change from the user's intent, name and link to the exact file, quote the relevant instruction, and explain its effect. Distinguish explicit requirements from interpretation; ordinary trade-offs and user-authorized scope changes are not new approval gates.
+- The description may be shortened in a large catalog. Lead with the action and the situation in the user's words, in third person or imperative. Add an exclusion only when a neighboring skill would claim the request. No keyword lists, and no trigger that fires on every edit or commit.
+- A new skill needs a distinct, recurring trigger. Omit optional frontmatter unless every consumer parses it the same way.
+- Keep guidance in SKILL.md; move detail to a one-level-deep reference only when it is substantial and unused on most activations.
 
-## Completion and verification
+## What a standing file should settle
 
-Treat action-implying requests as work to complete. Carry out requested running, inspecting, committing, or pushing through the authorized endpoint. Keep the original objective when incorporating follow-up corrections or answering side questions, unless the user cancels or replaces it. A blocked step does not end independent authorized work; report the blocker and remaining work without claiming completion or expanding scope.
+Precedence (user over file over skills, within host permissions); read-only versus implementation scope; when to ask versus decide; which actions need approval and that approval is reused; finishing through the authorized endpoint; and naming the rule behind any pause. Each in a line, once.
 
-Describe when available subagents improve independent work, with bounded ownership and an integration check; do not make delegation a prerequisite for routine tasks. Specify concise, outcome-first communication and enough evidence to explain material limitations.
+## Verifying changes
 
-Preserve required repository checks and meaningful assertions. Scale other verification to the change; repeat or broaden only for new changes, failures, or unresolved concerns. Disposable local tests without production access can run, be repaired for change-caused failures, and rerun without repeated approval.
-
-Small behavioral changes still need checks sensitive to the break. Avoid tests that merely mirror implementation details or documentation wording unless that representation is itself the contract. For changed instructions, try realistic matching requests, nearby non-matching requests, and requests that belong to a neighboring skill. Check task completion and authorization as well as selection. Use an independent behavioral pass when complexity warrants it. Packaging checks establish loading and link validity, not instruction effectiveness.
-
-When auditing, cite original wording and a concrete consequence. Preserve regression sensitivity, deletion proof, security/compatibility boundaries, and meaningful checks when simplifying instructions.
+Try matching requests, near misses, and requests that belong to a neighboring skill; check completion and authorization behavior, not just selection. Packaging checks prove loading, not effectiveness. When auditing, cite the wording and its concrete consequence, and keep deletion proof, security boundaries, and meaningful checks when shortening.

@@ -11,6 +11,4 @@ description: Changes C++ or Rust ownership, unsafe code, FFI, async cancellation
 | Rust | [references/rust.md](./references/rust.md) |
 | Mixed-language boundary | Both, especially ABI, allocation/release, errors, and lifetimes |
 
-Repository compiler/MSRV, standard/edition, build system, dependency policy, and conventions win. House defaults apply only to unconstrained projects. Check the installed toolchain and current vendor docs when adopting a feature.
-
-Preserve public ownership, threading, allocation, and failure contracts. Do not hide failures behind defaults or ignored results.
+House defaults in the references apply only where the repository's compiler or MSRV, standard or edition, build system, and dependency policy leave the choice open. Preserve public ownership, threading, allocation, and failure contracts; do not hide failures behind defaults or ignored results.

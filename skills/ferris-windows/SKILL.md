@@ -5,7 +5,7 @@ description: Implements or debugs Windows paths, encoding, DLL loading, privileg
 
 # Windows Engineering
 
-Windows and PowerShell 7 (`pwsh`) are house defaults only when the target is unconstrained. The actual host, task target, repository conventions, and runtime/API behavior take precedence. Use Windows PowerShell 5.1 or cmd/batch when required, with their own syntax and encoding rules. Apply only relevant sections; shell-only work does not require a Win32 audit.
+PowerShell 7 (`pwsh`) is the default shell unless the target or repository requires Windows PowerShell 5.1 or cmd. Apply only the sections the task touches.
 
 ## Shell execution
 
@@ -19,7 +19,7 @@ Windows and PowerShell 7 (`pwsh`) are house defaults only when the target is unc
 - Names are usually case-preserving/insensitive, but NTFS directories can be case-sensitive. No case-only source collisions or lowercasing as universal identity; use a two-step Git move for case-only renames. Avoid device names (`CON`, `PRN`, `AUX`, `NUL`, `COM1`–`COM9`, `LPT1`–`LPT9`, including extensions), trailing spaces/dots, and invalid filename characters.
 - Open-file deletion/replacement depends on the operation and existing share modes, notably `FILE_SHARE_DELETE`. Identify the denying handle/process, including LNK1168 holders; retries help only if it will release the handle.
 - Load non-system DLLs from trusted absolute paths with appropriate `LoadLibraryExW` `LOAD_LIBRARY_SEARCH_*` flags for dependencies. The top-level path does not secure transitive loads. Avoid current-directory/PATH searching and process-wide search-path mutation around individual calls.
-- Stay unelevated except for the specific required operation. Symlinks are fallible and may need Developer Mode/privilege; junctions only cover directories and copies lose link/update semantics. Use a behavior-preserving fallback within the authorized scope without repeated approval. Ask before changing required link/update semantics, escalating privileges, or making persistent machine-wide changes unless already authorized; if no acceptable fallback exists, report the limitation instead of silently degrading.
+- Stay unelevated except for the one operation that needs it; elevation and persistent machine-wide changes need approval. Symlinks may need Developer Mode or privilege; junctions cover only directories, and copies lose update semantics. A fallback that preserves behavior needs no extra approval; one that changes link or update semantics does, and otherwise report the limitation.
 
 ## Encoding and terminal I/O
 
