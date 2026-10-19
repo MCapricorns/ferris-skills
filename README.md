@@ -1,33 +1,30 @@
 # ferris-skills
 
-Three engineering skills plus one instruction-authoring skill, focused on house choices and easily missed contracts, not language tutorials or generic coding advice. Compatible with the [Agent Skills format](https://agentskills.io/specification), including Pi and Claude Code.
+Five engineering skills plus one instruction-authoring skill, focused on house choices and easily missed contracts, not language tutorials or generic coding advice. Compatible with the [Agent Skills format](https://agentskills.io/specification), including Pi and Claude Code.
 
 Primary development environment: **Windows with PowerShell 7 (`pwsh`)**. Command examples use PowerShell; other hosts and legacy shells are compatibility targets, not defaults.
 
 ## Skills
 
-| Skill | Use for | Guidance |
-|-------|---------|----------|
-| [ferris-workflow](skills/ferris-workflow/SKILL.md) | Diagnosing a failure, writing a sensitive test, proving a deletion, or simplifying lifecycle/races | Boundaries, verification, debugging, deletion proof, and lifecycle/races in SKILL.md |
-| [ferris-native](skills/ferris-native/SKILL.md) | C++/Rust ownership, unsafe/FFI, async cancellation, or compiler/linker and Cargo/MSBuild failures | Separate C++ and Rust references; read both for mixed-language boundaries |
-| [ferris-windows](skills/ferris-windows/SKILL.md) | Windows paths, encoding, DLL loading, elevation, or Win32/COM/PInvoke | Shell, paths, DLL search, encoding, privilege, and GUI sections in SKILL.md |
-| [ferris-instruct](skills/ferris-instruct/SKILL.md) | Adding, editing, or reviewing SKILL.md, AGENTS.md, or other always-on agent instructions | Authoring, authorization, clarification, and completion in SKILL.md |
+| Skill | Use for |
+|-------|---------|
+| [ferris-workflow](skills/ferris-workflow/SKILL.md) | Diagnosing a failure, writing a sensitive test, proving a deletion, or changing cancellation and shared state |
+| [ferris-native](skills/ferris-native/SKILL.md) | C++/Rust ownership, unsafe/FFI, async cancellation, or compiler/linker and Cargo/MSBuild failures; separate C++ and Rust references |
+| [ferris-windows](skills/ferris-windows/SKILL.md) | Windows paths, encoding, DLL loading, elevation, Win32/COM/PInvoke, or PowerShell 7 commands |
+| [ferris-git](skills/ferris-git/SKILL.md) | Conflicts, lost-work recovery, requested history rewrites, and line-ending, attribute, or submodule problems |
+| [ferris-perf](skills/ferris-perf/SKILL.md) | Profiling, benchmarking, and backing a speedup or memory claim with numbers |
+| [ferris-instruct](skills/ferris-instruct/SKILL.md) | Adding, editing, or reviewing SKILL.md, AGENTS.md, or other always-on agent instructions |
 
-Load by task, not by chain: a Python regression needs workflow, not native; Linux Rust needs no Windows rules; a compiler fix does not load instruct. References link directly from their entry point.
+Load by task, not by chain: a Python regression needs workflow, not native; Linux Rust needs no Windows rules; a routine commit loads no skill.
 
 ## Design rules
 
-- **Keep the delta over model knowledge.** House preferences and consequential traps stay; syntax tutorials, investigation itineraries, and generic caution do not.
-- **Precise triggers, compact bodies.** Descriptions say what the skill does and when, in third person or imperative, and still route if a catalog shortens them. A short exclusion belongs there only when another skill would claim the same request. Keep concise guidance in SKILL.md; split only substantial, independent detail that benefits from on-demand reading.
-- **One concern, one owner.** Workflow owns diagnosis/tests/cleanup, native owns language contracts, Windows owns platform behavior, instruct owns standing agent instructions. Do not add a fifth skill for a one-off.
-- **Finish authorized work.** Make routine reversible choices, reuse existing approvals, and do not stop after a first draft. Ask for consequential missing decisions or explicit approval boundaries; a blocked step does not end safe independent work. Repository conventions win over house defaults; check current vendor docs when adopting a feature.
-- **Preserve guarantees.** Shorter text must keep regression sensitivity, deletion proof, security/compatibility boundaries, and meaningful checks.
+- **Delta over model knowledge.** Keep house preferences and consequential traps; cut tutorials, generic caution, and restated defaults. Say each rule once, plainly; stacked MUST/NEVER wording makes current models over-apply it.
+- **One rule, one owner.** The user's always-on AGENTS.md/CLAUDE.md owns authority, approvals, communication, secrets, and commit format. Skills own task depth: workflow owns diagnosis, tests, and cleanup; native owns language contracts; Windows owns platform behavior; git owns repair and history; perf owns measurement; instruct owns standing instructions. A new skill needs a distinct, recurring trigger.
+- **Precise triggers, compact bodies.** Descriptions lead with the action and situation in third person or imperative and add an exclusion only against a neighboring skill. Split into a reference only for substantial detail unused on most activations.
+- **Preserve guarantees.** Shorter text keeps regression sensitivity, deletion proof, security/compatibility boundaries, and meaningful checks.
 
-Keep guidance model-neutral. Preserve user intent, make approval boundaries explicit, and calibrate delegation and verification to the task. Keep descriptions specific and supporting detail available on demand.
-
-In this repository, frontmatter uses only `name` and `description`, both single-line plain scalars. Avoid `: ` and ` #` in their values; names match their directories.
-
-After changes to skills, README skill listings, or the validator, run `python scripts/validate_skills.py`. CI uses the same validator for frontmatter/YAML safety, naming/description limits, local references, orphan references, and README coverage. It checks packaging, not model effectiveness.
+Frontmatter uses only `name` and `description`, both single-line plain scalars without `: ` or ` #`; names match their directories. After changing skills, README listings, or the validator, run `python scripts/validate_skills.py`; CI runs the same packaging checks, which do not measure model effectiveness.
 
 ## Install and update
 
@@ -45,7 +42,7 @@ npx skills add github:MCapricorns/ferris-skills -s '*' -g
 npx skills update -g -y
 ```
 
-Use `-s ferris-workflow` or `-s ferris-instruct` to select one skill. Add `--copy` if symlinks are unsuitable. Manual installation: copy desired `skills/<name>/` directories into `~/.agents/skills/` or the agent's own skill directory. Reload skills or restart the agent after updating.
+Use `-s <name>` (for example `-s ferris-git`) to select one skill. Add `--copy` if symlinks are unsuitable. Manual installation: copy desired `skills/<name>/` directories into `~/.agents/skills/` or the agent's own skill directory. Reload skills or restart the agent after updating.
 
 ### Migrating from six skills
 
