@@ -6,7 +6,7 @@ Checks every skills/<name>/SKILL.md for:
     scalars, closing `---` — the strictest form every agent loader parses
   - YAML plain-scalar safety: no `: `, no ` #`, no leading indicator char
   - name matches the directory, is lowercase kebab-case, unique, <= 64 chars
-  - description non-empty and <= 1024 chars (Claude Code loader limit)
+  - description non-empty and <= 1024 chars (Agent Skills spec limit)
   - every relative markdown link and every `references/*.md` mention resolves
   - no orphan files under references/ (each must be cited from SKILL.md)
   - every skill directory is mentioned in the top-level README
